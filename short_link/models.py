@@ -15,7 +15,6 @@ class Links(DateModel):
         unique=True,
         blank=False,
         null=False,
-        default=None,
     )
 
     def __str__(self):
