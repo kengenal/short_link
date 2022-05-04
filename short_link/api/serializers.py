@@ -7,12 +7,12 @@ from short_link.models import Links
 class ShortLinkSerializer(serializers.ModelSerializer):
     link = serializers.SerializerMethodField(read_only=True)
     url = serializers.URLField(required=True)
+    stats = serializers.IntegerField(source='linkstats_set.count', read_only=True)
 
     class Meta:
         model = Links
-
-        read_only_fields = ['new_url']
-        fields = ['url', 'link'] + read_only_fields
+        read_only_fields = ['new_url', 'stats', 'link']
+        fields = ['url'] + read_only_fields
 
     def get_link(self, obj):
         return self.context.get(
